@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manong.dao.TeacherMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.manong.entity.Teacher">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="intro" property="intro" />
+        <result column="career" property="career" />
+        <result column="level" property="level" />
+        <result column="avatar" property="avatar" />
+        <result column="sort" property="sort" />
+        <result column="isDeleted" property="isDeleted" />
+        <result column="createDate" property="createDate" />
+        <result column="modifyDate" property="modifyDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, intro, career, level, avatar, sort, isDeleted, createDate, modifyDate
+    </sql>
+
+    <select id="findTeacherListByPage" resultType="com.manong.entity.Teacher">
+        select * from edu_teacher
+        <where>
+            <if test="teacher.name!=null and teacher.name!=''">
+                and name like concat('%',#{teacher.name},'%')
+            </if>
+            <if test="teacher.level!=null">
+                and level = #{teacher.level}
+            </if>
+            <if test="teacher.startDate!=null">
+              <![CDATA[and createDate >= #{teacher.startDate}]]>
+            </if>
+            <if test="teacher.endDate!=null">
+                <![CDATA[and createDate <= #{teacher.endDate}]]>
+            </if>
+            and isDeleted = 0
+        </where>
+    </select>
+
+</mapper>

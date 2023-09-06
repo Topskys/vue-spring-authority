@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manong.dao.VideoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.manong.entity.Video">
+        <id column="id" property="id" />
+        <result column="courseId" property="courseId" />
+        <result column="chapterId" property="chapterId" />
+        <result column="title" property="title" />
+        <result column="videoSourceId" property="videoSourceId" />
+        <result column="videoOriginalName" property="videoOriginalName" />
+        <result column="sort" property="sort" />
+        <result column="playCount" property="playCount" />
+        <result column="isFree" property="isFree" />
+        <result column="duration" property="duration" />
+        <result column="status" property="status" />
+        <result column="size" property="size" />
+        <result column="createDate" property="createDate" />
+        <result column="modifyDate" property="modifyDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, courseId, chapterId, title, videoSourceId, videoOriginalName, sort, playCount, isFree, duration, status, size, createDate, modifyDate
+    </sql>
+
+</mapper>

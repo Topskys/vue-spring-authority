@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manong.dao.SubjectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.manong.entity.Subject">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="parentId" property="parentId" />
+        <result column="sort" property="sort" />
+        <result column="createDate" property="createDate" />
+        <result column="modifyDate" property="modifyDate" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, parentId, sort, createDate, modifyDate
+    </sql>
+
+    <resultMap id="nestedSubjectResultMap" type="com.manong.vo.SubjectVo">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="sort" property="sort" />
+        <collection property="children"
+                    ofType="com.manong.vo.SubjectVo"
+                    column="id"
+                    select="selectNestedListByParentId"
+        />
+    </resultMap>
+
+    <select id="selectNestedListByParentId" resultMap="nestedSubjectResultMap">
+        select * from edu_subject where parentId = #{parentId}
+    </select>
+
+</mapper>
